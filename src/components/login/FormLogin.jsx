@@ -88,6 +88,9 @@ const StyledFormLogin = styled.div`
     color: white;
     cursor: pointer;
   }
+  @media (max-width: 500px){
+    width: 100%;
+  }
 `
 
 export default FormLogin
