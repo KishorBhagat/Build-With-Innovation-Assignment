@@ -1,7 +1,21 @@
+import styled from "styled-components"
+import FormLogin from "../components/login/FormLogin"
+
 function Login() {
   return (
-    <div>Login</div>
+    <StyledLogin>  
+        <FormLogin />
+    </StyledLogin>
   )
 }
+
+const StyledLogin = styled.div`
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
 
 export default Login
