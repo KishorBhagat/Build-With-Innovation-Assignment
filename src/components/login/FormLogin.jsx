@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components"
 
 function FormLogin() {
@@ -24,12 +25,17 @@ function FormLogin() {
         },
         body: JSON.stringify(formData)
       })
+      const data = await response.json();
+      console.log(data)
       if (response.ok) {
-        const data = await response.json();
         setIsLoading(false);
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data));
         window.location.replace('/');
+      }
+      else {
+        setIsLoading(false);
+        toast.error(data.message, { position: toast.POSITION.TOP_CENTER });
       }
     } catch (error) {
       setIsLoading(false);
