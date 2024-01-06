@@ -32,6 +32,7 @@ function Navbar() {
 
 const StyledNavbar = styled.nav`
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   height: 60px;
@@ -73,7 +74,7 @@ const StyledNavbar = styled.nav`
       }
     }
   }
-  @media (max-width: 769px){
+  @media (max-width: 1000px){
     position: fixed;
     .logo, .price-range-selector{
       display: none;

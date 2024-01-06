@@ -24,7 +24,7 @@ const StyledMobileNav = styled.div`
     background-color: #3e4753;
     color: white;
     gap: 10px;
-    @media (min-width: 769px) {
+    @media (min-width: 1000px) {
         display: none;
     }
 `

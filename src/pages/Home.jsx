@@ -90,7 +90,7 @@ function Home() {
 
 const StyledHome = styled.div`
     margin-top: 60px;
-    padding: 20px 8%;
+    padding: 20px 0;
     min-height: 100vh;
     background-color: #e3e6e6;
     .user-details{
@@ -116,8 +116,9 @@ const StyledHome = styled.div`
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
+        justify-content: center;
     }
-    @media (max-width: 769px) {
+    @media (max-width: 1000px) {
         margin-top: 100px;
         padding-top: 30px;
     }
