@@ -53,8 +53,6 @@ function Home() {
         fetchProducts();
     }, [])
 
-    console.log(loggedInUser)
-
     return (
         <StyledHome>
             <Navbar />

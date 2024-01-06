@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components"
 import { CartContext } from "../../context/CartContext";
+import StarRating from "../ui/StarRating";
 
 function Product({ product, removeCartBtn }) {
   const { id, title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images } = product;
@@ -27,6 +28,7 @@ function Product({ product, removeCartBtn }) {
       <img src={thumbnail} alt={title} />
       <div className="product-details">
         <span className="title ">{title}</span>
+        <StarRating id={id} rating={rating}/>
         <span className="price">${price}.00</span>
         {
           !removeCartBtn ?

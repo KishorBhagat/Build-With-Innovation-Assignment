@@ -1,17 +1,12 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import styled from "styled-components";
+import StarRating from "../ui/StarRating";
 
 function CartItem({product}) {
   const { id, title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images } = product;
   const { cartCount, setCartCount, cartItems, setCartItems } = useContext(CartContext);
 
-  const handleAddToCart = (product) => {
-    if (!cartItems.some((item) => item.id === product.id)) {
-      setCartCount(prevCount => prevCount + 1);
-      setCartItems([...cartItems, product]);
-    }
-  }
   const handleRemoveFromCart = (product) => {
     if (cartItems.some((item) => item.id === product.id)) {
       console.log("removed", product.id)
@@ -26,6 +21,7 @@ function CartItem({product}) {
       <img src={thumbnail} alt={title} />
       <div className="product-details">
         <span className="title ">{title}</span>
+        <StarRating id={id} rating={rating}/>
         <span className="price">${price}.00</span>
         <button className="remove-from-cart-btn" onClick={() => handleRemoveFromCart(product)}>
           Remove from cart
@@ -88,6 +84,9 @@ const StyledCartItem = styled.div`
       .remove-from-cart-btn{
         margin-bottom: 0px;
         font-size: 12px;
+      }
+      .star-rating{
+        display: none;
       }
     }
   }
