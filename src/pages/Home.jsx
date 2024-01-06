@@ -5,12 +5,14 @@ import styled from "styled-components";
 import { SearchContext } from "../context/SearchContext";
 import { FilterContext } from "../context/FilterContext";
 import MobileNav from "../components/ui/MobileNav";
+import PriceRangeSelector2 from "../components/ui/PriceRangeSelector2";
 
 function Home() {
     const [products, setProducts] = useState();
     const [filterdProducts, setFilteredProducts] = useState(products);
     const { searchValue } = useContext(SearchContext);
     const { priceRange, setPriceRange } = useContext(FilterContext);
+    const [isLoading, setIsLoading] = useState(false);
 
 
     let loggedInUser = localStorage.getItem('user');
@@ -35,9 +37,11 @@ function Home() {
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setIsLoading(true);
             const response = await fetch('https://dummyjson.com/products?limit=100');
             if (response.ok) {
                 const data = await response.json()
+                setIsLoading(false);
                 setProducts(data.products)
                 const prices = data.products.map(product => product.price);
                 setPriceRange({
@@ -54,36 +58,45 @@ function Home() {
     return (
         <StyledHome>
             <Navbar />
-            <MobileNav />
             <div className="user-details">
                 <h2 className="greet">{`Hello, ${loggedInUser.firstName} ${loggedInUser.lastName}`}</h2>
                 {/* <img className="avatar" src={loggedInUser.image} alt="" /> */}
             </div>
-
-            <div className="products">
-                {
-                    filterdProducts?.map((product, idx) => {
-                        const { id, title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images } = product;
-                        return (
-                            <Product
-                                product={product}
-                                // id={id}
-                                // title={title}
-                                // description={description}
-                                // price={price}
-                                // discountPercentage={discountPercentage}
-                                // rating={rating}
-                                // stock={stock}
-                                // brand={brand}
-                                // category={category}
-                                // thumbnail={thumbnail}
-                                // images={images}
-                                key={id}
-                            />
-                        )
-                    })
-                }
-            </div>
+            {
+                !isLoading ?
+                <>
+                    <div className="price-filter">
+                        <span>Filter by price: </span>
+                        <PriceRangeSelector2 />
+                    </div>
+                    <div className="products">
+                        {
+                            filterdProducts?.map((product, idx) => {
+                                const { id, title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images } = product;
+                                return (
+                                    <Product
+                                        product={product}
+                                        // id={id}
+                                        // title={title}
+                                        // description={description}
+                                        // price={price}
+                                        // discountPercentage={discountPercentage}
+                                        // rating={rating}
+                                        // stock={stock}
+                                        // brand={brand}
+                                        // category={category}
+                                        // thumbnail={thumbnail}
+                                        // images={images}
+                                        key={id}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
+                </>
+                :
+                <span className="loading-msg">Loading...</span>
+            }
         </StyledHome>
     )
 }
@@ -112,15 +125,24 @@ const StyledHome = styled.div`
             padding: 3px;
         }
     }
+    .price-filter{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 20px;
+        margin-bottom: 30px;
+        gap: 10px;
+    }
     .products{
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
         justify-content: center;
     }
-    @media (max-width: 1000px) {
+    .loading-msg{
+        display: block;
+        text-align: center;
         margin-top: 100px;
-        padding-top: 30px;
     }
 `
 export default Home

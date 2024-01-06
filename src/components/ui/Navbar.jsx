@@ -9,7 +9,7 @@ import PriceRangeSelector2 from './PriceRangeSelector2';
 
 function Navbar() {
 
-  const {cartCount} = useContext(CartContext);
+  const { cartCount } = useContext(CartContext);
   const handleLogout = () => {
     localStorage.removeItem('token');
     window.location.replace('/login')
@@ -18,14 +18,12 @@ function Navbar() {
 
   return (
     <StyledNavbar>
-        <Link to="/" className='logo'>Home</Link>
-        <SearchInput />
-        <div className='tools'>
-          <div style={{display: 'flex'}}><span  className='price-range-selector'>Filter by price:&nbsp;&nbsp;&nbsp;</span><PriceRangeSelector2 /></div>
-            
-            <Link to="/cart" className='cart-link'><button className="cart-btn"><IconCart /><span>{cartCount}</span></button></Link>
-            <button className='logout-btn' onClick={handleLogout}>Logout</button>
-        </div>
+      <Link to="/" className='logo'>Home</Link>
+      <SearchInput />
+      <div className='tools'>
+        <Link to="/cart" className='cart-link'><button className="cart-btn"><IconCart /><span>{cartCount}</span></button></Link>
+        <button className='logout-btn' onClick={handleLogout}>Logout</button>
+      </div>
     </StyledNavbar>
   )
 }
