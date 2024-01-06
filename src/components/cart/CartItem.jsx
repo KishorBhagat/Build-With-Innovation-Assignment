@@ -56,7 +56,6 @@ const StyledCartItem = styled.div`
     gap: 8px;
     padding: 0px 10px;
     flex: 1;
-
     .price{
       font-weight: 600;
     }
@@ -74,9 +73,22 @@ const StyledCartItem = styled.div`
     }
   }
   @media (max-width: 769px){
+    height: 100px;
     img{
       width: 150px;
       height: 100%;
+    }
+    .product-details{
+      gap: 2px;
+      justify-content: space-between;
+      padding: 10px 10px;
+      .title{
+        font-size: 14px;
+      }
+      .remove-from-cart-btn{
+        margin-bottom: 0px;
+        font-size: 12px;
+      }
     }
   }
 `
