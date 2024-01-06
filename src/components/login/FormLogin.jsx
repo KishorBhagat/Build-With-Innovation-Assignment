@@ -9,10 +9,13 @@ function FormLogin() {
   }
   const [formData, setFormData] = useState(initialFormState);
 
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData)
+    setIsLoading(true);
     try {
       const response = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
@@ -23,11 +26,13 @@ function FormLogin() {
       })
       if (response.ok) {
         const data = await response.json();
+        setIsLoading(false);
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data));
         window.location.replace('/');
       }
     } catch (error) {
+      setIsLoading(false);
       console.log(error)
     }
   }
@@ -47,7 +52,12 @@ function FormLogin() {
         <input type="text" name="username" onChange={handleChange} value={formData.username}/>
         <label htmlFor="">Password</label>
         <input type="password" name="password" onChange={handleChange} value={formData.password}/>
-        <button type="submit" className="submit-btn">Submit</button>
+        {
+          !isLoading ?
+          <button type="submit" className="submit-btn">Submit</button>
+          :
+          <button type="submit" className="submit-btn" disabled>Loading...</button>
+        }
       </form>
     </StyledFormLogin>
   )
@@ -88,6 +98,9 @@ const StyledFormLogin = styled.div`
     font-size: 20px;
     color: white;
     cursor: pointer;
+  }
+  button:disabled{
+    cursor: not-allowed;
   }
   @media (max-width: 500px){
     width: 100%;
