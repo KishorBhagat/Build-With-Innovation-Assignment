@@ -24,6 +24,7 @@ function FormLogin() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data));
         window.location.replace('/');
       }
     } catch (error) {

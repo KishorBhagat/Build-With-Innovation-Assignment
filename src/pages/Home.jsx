@@ -10,15 +10,19 @@ function Home() {
     const [products, setProducts] = useState();
     const [filterdProducts, setFilteredProducts] = useState(products);
     const { searchValue } = useContext(SearchContext);
-    const {priceRange, setPriceRange} = useContext(FilterContext);
+    const { priceRange, setPriceRange } = useContext(FilterContext);
+
+
+    let loggedInUser = localStorage.getItem('user');
+    loggedInUser = JSON.parse(loggedInUser);
 
     useEffect(() => {
         const filteredProds = products?.filter((obj) => {
             return obj.title?.toLowerCase().includes(searchValue.toLowerCase());
         });
-        if(searchValue !== '' || searchValue.length !== 0)  
+        if (searchValue !== '' || searchValue.length !== 0)
             setFilteredProducts(filteredProds);
-        else 
+        else
             setFilteredProducts(products);
     }, [searchValue, products])
 
@@ -45,10 +49,17 @@ function Home() {
         fetchProducts();
     }, [])
 
+    console.log(loggedInUser)
+
     return (
         <StyledHome>
             <Navbar />
             <MobileNav />
+            <div className="user-details">
+                <h2 className="greet">{`Hello, ${loggedInUser.firstName} ${loggedInUser.lastName}`}</h2>
+                {/* <img className="avatar" src={loggedInUser.image} alt="" /> */}
+            </div>
+
             <div className="products">
                 {
                     filterdProducts?.map((product, idx) => {
@@ -82,6 +93,25 @@ const StyledHome = styled.div`
     padding: 20px 8%;
     min-height: 100vh;
     background-color: #e3e6e6;
+    .user-details{
+        /* text-align: center; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        .greet{
+            /* text-align: center;
+            margin-bottom: 20px; */
+            display: inline-block;
+        }
+        .avatar{
+            height: 35px;
+            margin-left: 10px;
+            border: 1px solid gray;
+            border-radius: 50%;
+            padding: 3px;
+        }
+    }
     .products{
         display: flex;
         gap: 20px;
