@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import styled from "styled-components"
 import { CartContext } from "../../context/CartContext";
+import styled from "styled-components";
 
-function CartItem({ product, removeCartBtn }) {
+function CartItem({product}) {
   const { id, title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images } = product;
   const { cartCount, setCartCount, cartItems, setCartItems } = useContext(CartContext);
 
@@ -21,7 +21,6 @@ function CartItem({ product, removeCartBtn }) {
       setCartItems([...cartItems])
     }
   }
-
   return (
     <StyledCartItem>
       <img src={thumbnail} alt={title} />
@@ -81,4 +80,5 @@ const StyledCartItem = styled.div`
     }
   }
 `
+
 export default CartItem

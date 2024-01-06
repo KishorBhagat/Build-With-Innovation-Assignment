@@ -3,7 +3,7 @@ import Navbar from "../components/ui/Navbar"
 import { CartContext } from "../context/CartContext"
 import styled from "styled-components"
 import CartSummary from "../components/cart/CartSummary"
-import CartItem from "../components/cart/Cartitem"
+import CartItem from "../components/cart/CartItem"
 
 function Cart() {
     const { cartItems } = useContext(CartContext)
