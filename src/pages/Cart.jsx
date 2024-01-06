@@ -73,22 +73,10 @@ const StyledCart = styled.div`
         }
         .no-items{
             position: absolute;
-            top: calc(50% - 100px);
+            top: calc(50% + 100px);
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        /* .cart-wrapper{
-            width: 50%;
-            .heading{
-                margin-bottom: 20px;
-            }
-            .cart-items{
-                display: flex;
-                gap: 20px;
-                flex-wrap: wrap;
-            }
-            
-        } */
     }
     @media (max-width: 769px){
         .cart-container{
